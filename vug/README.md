@@ -1,0 +1,3 @@
+# Vast Url Generator
+
+BrightRoll web publishers supply URL parameters to the VAST request that they make that allows enables them to be part of the RTB (Real-Time Bidding) inventory.  They often leave out information or send the wrong information.  To avoid this, we will create some javascript that gathers as many of the parameters as possible from the web page and crafts the correct VAST URL for them to use.

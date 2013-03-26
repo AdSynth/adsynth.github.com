@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="keywords" content="meta keyword 1, meta keyword 2"/>
+  <meta name="description" content="my meta description"/>
+  <title>QUnit Test for Vast Url Generator</title>
+  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="lib/qunit/qunit.css">
+  <style type="text/css">
+    body {
+        padding: 10px;
+    }
+  </style>
+</head>
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+<script src="lib/qunit/qunit.js"></script>
+<script src="VUG.js"></script>
+<script src="test.js"></script>
+
+<hr />
+
+<div ng-app="vug" ng-controller="ResultsCtrl" class="row-fluid" style="width:99%">
+    <div class="span9">
+        <div class="pull-right">
+            <input type="search" ng-model="query" placeholder="Filter parameters">
+        </div>
+        <h3>Results for this page</h3>
+
+        <table class="table table-bordered table-striped table-hover table-condensed">
+          <thead>
+            <tr>
+                <th>Name</th>
+                <th>Value</th>
+                <th>Description</th>
+                <th>Source</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="result in results|filter:query" ng-class="{'success': result.source}">
+                <td>{{result.name}}</td>
+                <td title="{{result.value}}">{{result.value || "" |truncate:30}}</td>
+                <td>{{result.description}}</td>
+                <td>{{result.source}}</td>
+            <tr>
+          </tbody>
+        </table>
+    </div>
+    <div class="span3">
+        <h3>VAST Url</h>
+        <input ng-model="baseUrl" type="url" class="input-xlarge" placeholder="http://vast.bpxxxxx.btrll.com/vast/xxxxxx">
+        <h4>Query String</h4>
+        <textarea ng-model="queryString" rows="8" class="input-xlarge"></textarea>
+        <div class="muted">{{queryString.length}} characters</div>
+        <br />
+        <button class="btn" ng-click="fetchVast()">Test Fetch</button>
+
+        <h4>Vast XML response</h4>
+        <iframe id="vastiframe" src="{{vastUrl}}" class="input-xlarge"></iframe>
+        <br />
+        <a ng-show="vastUrl" target="_blank" href="{{vastUrl}}">Open in a new window</a>
+    </div>
+</div>
+
+</body>
+<script src="lib/angular.min.js"></script>
+<script src="test-app.js"></script>
+</html>
